@@ -1,0 +1,95 @@
+{
+  "openapi": "3.0.1",
+  "info": { "title": "OpenAPI definition", "version": "v0" },
+  "servers": [
+    { "url": "http://localhost:8080", "description": "Generated server url" }
+  ],
+  "tags": [{ "name": "User", "description": "Join System APIs" }],
+  "paths": {
+    "/auth/sign_up": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Sign Up",
+        "operationId": "signUp",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SignUpRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Sign up success",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/SignUpResponse" }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/SignUpResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/sign_in": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Sign In",
+        "operationId": "signIn",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SignInRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Sign in success",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/SignInResponse" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SignUpRequest": {
+        "type": "object",
+        "properties": {
+          "fullName": { "type": "string" },
+          "email": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      },
+      "SignUpResponse": {
+        "type": "object",
+        "properties": { "userId": { "type": "string" } }
+      },
+      "SignInRequest": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      },
+      "SignInResponse": {
+        "type": "object",
+        "properties": { "token": { "type": "string" } }
+      }
+    }
+  }
+}
